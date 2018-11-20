@@ -1,1 +1,250 @@
 
+require 'terminal-table'
+require 'terminal-table/import'
+
+class Cola
+    def initialize
+        @cola = {
+            tope: nil,
+            final: nil,
+            esta_vacia: true,
+            size: 0,
+        } 
+        @menor = {
+            tope: nil,
+            final: nil,
+            esta_vacia: true,
+            esta_llena: false,
+            size: 0
+        }
+        @mayor = {
+            tope: nil,
+            final: nil,
+            esta_vacia: true,
+            esta_llena: false,
+            size: 0
+        }
+        @pasos=[]
+    end
+       #otros
+   def mostrar()
+    ar=[]
+    if @cola[:esta_vacia]==true
+        ar.push(nil)
+    else
+        a=@cola[:tope]
+        loop do
+            if a==nil
+                break
+            end
+            b=a[:valor]
+            ar.push(b)
+            a=a[:siguiente]    
+        end
+    end
+     @ars=ar.join('=>')
+     @pasos.push(@ars)
+   end
+
+    def insertar_menor(valor)
+        if @menor[:tope] == nil
+                elemento = {
+                    valor:valor,
+                    posicion:@menor[:size],
+                    siguiente:nil
+                }
+                
+               @menor[:tope] = elemento
+               @menor[:final] =elemento
+               @menor[:esta_vacia]=false
+        else
+                elemento ={
+                    valor:valor,
+                    size: @menor[:size],
+                    siguiente:nil
+                }
+               fondo=@menor[:final]
+               fondo[:siguiente]=elemento
+              @menor[:final]=elemento
+        end
+           @menor[:size]+=1
+           mostrar
+
+    end
+    def insertar_mayor(valor)
+        if @mayor[:tope]==nil
+                elemento = {
+                    valor:valor,
+                    size:0,
+                    siguiente:nil
+                }
+          @mayor[:tope] = elemento
+         @mayor[:final]=elemento
+           @mayor[:esta_vacia]=false
+        else
+                elemento ={
+                    valor:valor,
+                    posicion: @mayor[:size],
+                    siguiente:nil
+    
+                }
+               tope=@mayor[:final]
+               tope[:siguiente]=elemento
+             @mayor[:final]=elemento
+            
+    
+        end
+            @mayor[:size]+=1
+            mostrar    
+    end
+    def insertar_mayor_principal
+        for i in 1..@mayor[:size] do
+         valor= @mayor[:tope][:valor]
+         elemento ={
+             valor:valor,
+             siguiente:nil
+         }
+                  fondo=@cola[:final]
+                fondo[:siguiente]=elemento
+                 @cola[:final]=elemento
+                 @mayor[:tope]=@mayor[:tope][:siguiente]
+                 mostrar
+                 
+     end
+
+     
+    end
+    def insertar_menor_principal
+        #NOmostrar
+        for i in 1..@menor[:size] do  
+            valor=@menor[:tope][:valor]
+            elemento = {
+                valor: valor,
+                siguiente: nil
+            }
+            if @cola[:esta_vacia]==true
+            @cola[:tope] =elemento
+            @cola[:final]=elemento
+            @cola[:esta_vacia]=false
+            mostrar
+            else 
+            fondo=@cola[:final]
+            fondo[:siguiente]=elemento
+            @cola[:final]=elemento
+            mostrar
+            end
+            @menor[:tope]=@menor[:tope][:siguiente]
+    end
+
+    end
+    def convertir(f)
+            for i in 0..f.size-1 do
+                v=f[i]
+                elemento={
+                    valor:f[i],
+                    siguiente:nil
+                }
+                
+                if @cola[:esta_vacia]==true
+                   @cola[:tope]=elemento
+                   @cola[:final]=elemento
+                   @cola[:esta_vacia]=false
+                   @cola[:size]+1 
+                   #mostrar 
+                  
+                else
+                    
+                    if v>@cola[:final][:valor]
+                        fondo=@cola[:final]
+                        fondo[:siguiente]=elemento
+                        @cola[:final]=elemento
+                        @cola[:size]+1
+                        #mostrar   
+                    
+                    else
+                        ordenar(v,elemento)
+                    end
+                end
+        end
+    end
+    def ordenar(v,elemento)
+        menor=0
+     begin      
+       valor= @cola[:tope][:valor]
+                if  v >= valor
+                menor+=1   
+               insertar_menor(valor)
+                elsif v < valor  
+                insertar_mayor(valor)
+                end 
+                #mostrar
+             @cola[:tope]=@cola[:tope][:siguiente]
+     end while @cola[:tope]!=nil
+     mostrar
+
+        @cola[:final]= nil
+        @cola[:esta_vacia]=true
+        @cola[:size]=0
+        if menor>0  
+       insertar_menor_principal() 
+       mostrar
+
+        @cola[:size]+=1
+        fondo = @cola[:final]
+        fondo[:siguiente]=elemento
+        @cola[:final]=elemento
+        @cola[:size]+=1  
+
+        insertar_mayor_principal()
+        @cola[:size]+=1
+        #mostrar
+
+        else
+         @cola[:final]=elemento
+         @cola[:tope]=elemento 
+         @cola[:esta_vacia]=false
+         @cola[:size]+=1
+       #mostrar 
+        insertar_mayor_principal()
+        @cola[:size]+=1
+        #mostrar  
+        
+        end
+        @mayor[:final]=nil
+        @menor[:final]= nil
+        @mayor[:esta_vacia]=true
+        @menor[:esta_vacia]=true
+        @mayor[:size]=0
+        @menor[:size]=0
+        @cola[:size]+1
+        #mostrar 
+        
+
+    
+end
+def impri(f)
+    puts 'Datos Ingresados'
+    e= f
+     v=e.join(' > ')
+     puts "Elementos a ordenar:  #{v}"    
+    t = table [{:value => 'Cola', :colspan => 1, :alignment => :center},'pasos']
+    @cont=0
+    for i in 0..@pasos.size-1 do
+        t.add_separator
+    t << ["#{@pasos[i]}",@cont]
+    @cont+=1
+    end
+    puts t
+end
+def obtener_arreglo
+    puts "Pasos a Realizar: #{@cont}"
+end
+def obtener
+    r= @ars
+    puts "Ordenamiento: #{r}"
+   end
+
+def rendii
+   @cont    
+end
+end
