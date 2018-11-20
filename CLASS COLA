@@ -1,26 +1,4 @@
-
-require 'terminal-table'
-require 'terminal-table/import'
-
-class Cola
-    def initialize
-        @cola = {
-            tope: nil,
-            final: nil,
-            esta_vacia: true,
-            size: 0,
-        } 
-        @menor = {
-            tope: nil,
-            final: nil,
-            esta_vacia: true,
-            esta_llena: false,
-            size: 0
-        }
-        @mayor = {
-            tope: nil,
-            final: nil,
-            esta_vacia: true,
+ true,
             esta_llena: false,
             size: 0
         }
@@ -171,38 +149,4 @@ class Cola
                 elsif v < valor  
                 insertar_mayor(valor)
                 end 
-                #mostrar
-             @cola[:tope]=@cola[:tope][:siguiente]
-     end while @cola[:tope]!=nil
-     mostrar
-
-        @cola[:final]= nil
-        @cola[:esta_vacia]=true
-        @cola[:size]=0
-        if menor>0  
-       insertar_menor_principal() 
-       mostrar
-
-        @cola[:size]+=1
-        fondo = @cola[:final]
-        fondo[:siguiente]=elemento
-        @cola[:final]=elemento
-        @cola[:size]+=1  
-
-        insertar_mayor_principal()
-        @cola[:size]+=1
-        #mostrar
-
-        else
-         @cola[:final]=elemento
-         @cola[:tope]=elemento 
-         @cola[:esta_vacia]=false
-         @cola[:size]+=1
-       #mostrar 
-        insertar_mayor_principal()
-        @cola[:size]+=1
-        #mostrar  
         
-        end
-        @mayor[:final]=nil
-        @menor[:final]= nil
