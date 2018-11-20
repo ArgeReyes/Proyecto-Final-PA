@@ -34,8 +34,8 @@ class Pila
                 a=a[:siguiente]    
             end
         end
-        ar=ar.join('=>') 
-        @pasop.push(ar)
+        @arss=ar.join('=>') 
+        @pasop.push(@arss)
     end
     def insertar
         if @pila_aux[:vacia]==false
@@ -61,7 +61,6 @@ class Pila
             @pila[:tope]=elemento
             @pila[:size]+=1
             mostrarr
-            puts 'e2'
         
         end
     
@@ -69,7 +68,7 @@ class Pila
       end while @pila_aux[:tope]!=nil
       @pila_aux[:vacia]=true
     
-    4
+    
     
     end
     end
@@ -153,15 +152,28 @@ class Pila
         end
         
     end    
-    def Impri
-
+    def impri(f)
+        e= f
+        v=e.join(' > ')
+        puts "Elementos a ordenar:  #{v}"
         puts ''
          t = table [{:value => 'Iteracion', :alignment => :center},'pasos']
-        cont=0
+        @con=0
         for i in 0..@pasop.size-1 do
-        t << ["#{@pasop[i]}",cont]
-        cont+=1
+            t.add_separator
+        t << ["#{@pasop[i]}",@con]
+        @con+=1
         end
         puts t
     end
+    def obtener_arreglo
+          puts "Pasos a Realizar: #{@con}"
+       end
+       def obtener
+        g= @arss
+        puts "Ordenamiento: #{g}"
+    end
+    def rendiit
+        @con  
+     end
 end
