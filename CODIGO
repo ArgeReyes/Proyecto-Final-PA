@@ -1,1 +1,99 @@
 
+require_relative 'cola'
+require_relative 'lista'
+require_relative 'pila'
+require 'terminal-table/import'
+cola=Cola.new
+lista=Lista.new
+pila=Pila.new
+def cls
+    system('cls')
+end
+
+   begin
+    puts 'BIENVENIDO'
+    puts '1.Ingresar numeros'
+    puts '2. Seleccione ordenamiento'
+    puts '3. Historial'
+    puts '4.salir'
+    op=gets.chomp
+    if op == '1'
+    puts "Ingrese numeros que desee ordenar"
+    n = gets.chomp
+    f = n.split(' ').map(&:to_i)
+    puts
+    cls
+    elsif op=='2'
+        puts '################################################'
+        puts 'Menu'
+        puts 'Estructuras'
+        puts '1.cola'
+        puts '2.pila'
+        puts '3.listas'
+        es=gets.chomp
+        if es=='1'
+            puts '*************'
+            puts 'COLA'
+        cola.convertir(f)
+             puts  cola.impri(f)
+            puts
+            system('pause')
+            cls
+        elsif es=='2'
+            puts '*************'
+            puts "pila"
+            puts pila.ordenar_pila(f)
+            puts pila.impri(f)
+            system('pause')
+            cls
+        elsif es =='3'
+            puts 'listas'
+            lista.ordenar_lista(f)
+            lista.mostrar
+       puts lista.imprirr(f)
+       system('pause')
+            cls
+            
+        else
+        end
+    elsif op=='3'
+        puts '*************'
+    puts "Ingrese antes a selecionar Ordenamiento"
+    puts "Historial"
+    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    puts 'Estructura: COLA '
+     f=cola.obtener_arreglo 
+     t= cola.obtener
+       c=cola.rendii
+     d=c
+      ff= lista.rendi 
+      z=ff
+     re=z/d
+     puts "Rendimiento: #{re} %"
+     puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+     puts
+     puts 'Estructura: PILA'
+     s=pila.obtener_arreglo  
+     gg= pila.obtener
+       pp=pila.rendiit
+    puts t=pp
+      q= lista.rendi 
+     puts zz=q
+     res=zz/t
+     puts "Rendimiento: #{res} %"
+     puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+     puts 
+     puts 'Estructura: LISTA '
+     v=lista.obtener_arreglo
+     u= lista.obtener
+     x=lista.rendio
+      e=x
+       a= lista.rendi 
+      l=a
+      rs=l/e
+      puts "Rendimiento: #{rs} %"
+     puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+     system('pause')
+     cls
+    end
+end while op!='4'
