@@ -1,5 +1,5 @@
-#Clase Lista
-require 'terminal-table'
+
+           require 'terminal-table'
 require 'terminal-table/import'
 class Lista
     def initialize
@@ -27,7 +27,7 @@ class Lista
                 a=a[:siguiente]    
             end
         end
-         @ars=@ar.join('=>')
+         @ats=@ar.join('=>')
          
     end
     def ordenar_lista(f)
@@ -95,6 +95,16 @@ class Lista
         print t
     end
     def obtener_arreglo
+       puts "Pasos a Realizar: #{@contt}"
+    end
+    def rendi
+        @contt*100
+    end
+    def obtener
+        j=@ats
+        puts "Ordenamiento: #{j}"
+    end
+    def rendio
         @contt
     end
     
