@@ -206,39 +206,3 @@ class Cola
         end
         @mayor[:final]=nil
         @menor[:final]= nil
-        @mayor[:esta_vacia]=true
-        @menor[:esta_vacia]=true
-        @mayor[:size]=0
-        @menor[:size]=0
-        @cola[:size]+1
-        #mostrar 
-        
-
-    
-end
-def impri(f)
-    puts 'Datos Ingresados'
-    e= f
-     v=e.join(' > ')
-     puts "Elementos a ordenar:  #{v}"    
-    t = table [{:value => 'Cola', :colspan => 1, :alignment => :center},'pasos']
-    @cont=0
-    for i in 0..@pasos.size-1 do
-        t.add_separator
-    t << ["#{@pasos[i]}",@cont]
-    @cont+=1
-    end
-    puts t
-end
-def obtener_arreglo
-    puts "Pasos a Realizar: #{@cont}"
-end
-def obtener
-    r= @ars
-    puts "Ordenamiento: #{r}"
-   end
-
-def rendii
-   @cont    
-end
-end
