@@ -94,12 +94,6 @@ class Cola
             
     
         end
-            @mayor[:size]+=1
-            mostrar    
-    end
-    def insertar_mayor_principal
-        for i in 1..@mayor[:size] do
-         valor= @mayor[:tope][:valor]
          elemento ={
              valor:valor,
              siguiente:nil
