@@ -1,1 +1,101 @@
+#Clase Lista
+require 'terminal-table'
+require 'terminal-table/import'
+class Lista
+    def initialize
+    @lista  = {
+        tope: nil,
+        final: nil,
+        vacia: true,
+        mostrar: 1,
+        size: 0
+    }
+    @paso=[]
+    end
+    def mostrar
+       @ar=[]
+        if @lista[:vacia]==true
+            @ar.push(' ')
+        else
+            a=@lista[:tope]
+            loop do
+                if a==nil
+                    break
+                end
+                b=a[:valor]
+                @ar.push(b)
+                a=a[:siguiente]    
+            end
+        end
+         @ars=@ar.join('=>')
+         
+    end
+    def ordenar_lista(f)
 
+        for i in 0..f.size-1 do
+            a=f[i]
+        
+            elemento={
+                valor: a,
+                siguiente: nil,
+            }
+          
+            if @lista[:vacia]==true
+                @lista[:tope]=elemento
+                @lista[:final]=elemento
+                @lista[:vacia]=false
+                @lista[:size]+=1
+                @paso.push(mostrar)
+            else
+                if a<@lista[:tope][:valor]
+                    tope=@lista[:tope]
+                    elemento[:siguiente]=tope
+                    @lista[:tope]=elemento
+                    @lista[:size]+=1
+                    @paso.push(mostrar)
+        
+                elsif a>=@lista[:final][:valor]
+                    elemento_final=@lista[:final]
+                    elemento_final[:siguiente]=elemento
+                    @lista[:final]=elemento
+                    @lista[:size]+=1
+                    @paso.push(mostrar)
+                else
+                    e=@lista[:tope]
+                    @lista[:size]+=1
+                    @paso.push(mostrar)
+                    anterior=nil
+                   loop do     
+                    if a<e[:valor]
+                        elemento[:siguiente]=e
+                        anterior[:siguiente]=elemento
+                         break
+                    end
+                    anterior=e
+                    e=e[:siguiente]
+                   end
+                end
+        
+            end
+        end
+        @lista[:mostrar]=2
+    end
+    def imprirr(f)
+        puts 'Mostar Lista Ingresados'
+        e= f
+        v=e.join(' > ')
+        puts "Elementos a ordenar:  #{v}"
+        t = table [{:value => 'Iteracion', :alignment => :center},'pasos']
+        @contt=0
+        for i in 0..@paso.size-1 do
+            t.add_separator
+        t << ["#{@paso[i]}",@contt]
+        @contt+=1
+        end
+        print t
+    end
+    def obtener_arreglo
+        @contt
+    end
+    
+end
